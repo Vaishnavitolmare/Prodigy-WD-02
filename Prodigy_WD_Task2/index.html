@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Stopwatch Web Application</title>
+
+    <body>
+        <h1>Stopwatch</h1>
+        <div id="display">00:00:00</div>
+        <button class="start" onclick="start()">Start</button>
+        <button class="stop" onclick="stop()">Pause</button>
+        <button class="reset" onclick="reset()">Reset</button>
+    
+
+    <style>
+       body{
+        font-family: Arial,sans-serif;
+        text-align: center;
+        background: #222 ;
+        color: white;
+       }
+
+       h1{
+        margin-top: 200px;
+       }
+
+       #display{
+        font-size: 40px;
+        margin: 20px 0;
+       }
+
+       button{
+        padding: 10px 20px;
+        margin: 5px;
+        font-size: 16px;
+        cursor: pointer;
+       }
+
+       .start{
+        background: green;
+        color: white;
+       }
+
+       .stop{
+        background:red;
+        color: white;
+       }
+
+       .reset{
+        background: violet;
+        color: white;
+       }
+    </style>
+
+    <script>
+        let seconds=0;
+        let minutes=0;
+        let hours=0;
+        let timer=null;
+
+        function start()
+        {
+            if(timer!==null)
+            return;
+            timer=setInterval(updateTime,1000);
+        }
+
+        function stop()
+        {
+            clearInterval(timer);
+            timer=null;
+        }
+
+        function reset()
+        {
+           stop();
+           seconds=minutes=hours=0;
+           document.getElementById("display").innerText="00:00:00"
+        }
+
+        function updateTime()
+        {
+            seconds++;
+            if(seconds==60)
+            {
+                seconds=0;
+                minutes++;
+            }
+            if(minutes==60)
+            {
+                minutes=0;
+                hours++;
+            }
+
+            let h=hours<10 ? "0" +hours:hours;
+            let m=minutes<10 ? "0" +minutes:minutes;
+            let s=seconds<10 ? "0" +seconds:seconds;
+            document.getElementById("display").innerText=h +":"+ m + ":" +s;
+        }
+
+        
+    </script>    
+</head>
+</body>
+</html>   
